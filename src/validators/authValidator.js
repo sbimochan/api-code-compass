@@ -8,6 +8,10 @@ const loginSchema = Joi.object({
   password: Joi.string().required()
 });
 
+const refreshTokenSchema = Joi.object({
+  refreshToken: Joi.string().required()
+});
+
 /**
  * Validate login request
  *
@@ -22,4 +26,18 @@ function loginValidator(req, res, next) {
     .catch((err) => next(err));
 }
 
-export { loginValidator };
+/**
+ * Validate refresh access token request
+ *
+ * @param   {Object}   req
+ * @param   {Object}   res
+ * @param   {Function} next
+ * @returns {Promise}
+ */
+function refreshTokenValidator(req, res, next) {
+  return validate(req.body, refreshTokenSchema)
+    .then(() => next())
+    .catch((err) => next(err));
+}
+
+export { loginValidator, refreshTokenValidator };
