@@ -6,6 +6,7 @@ import roleRoutes from './routes/roleRoutes';
 import authRoutes from './routes/authRoutes';
 import movieRoutes from './routes/movieRoutes';
 import rentalRoutes from './routes/rentalRoutes';
+import userRoleRoutes from './routes/userRoleRoutes';
 
 /**
  * Contains all API routes for the application.
@@ -33,6 +34,7 @@ router.use('/users', userRoutes);
 router.use('/movies', movieRoutes);
 router.use('/rents', rentalRoutes);
 router.use('/roles', roleRoutes);
+router.use('/user', userRoleRoutes);
 router.use('/', authRoutes);
 
 export default router;
