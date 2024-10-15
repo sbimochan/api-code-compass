@@ -1,5 +1,5 @@
 import db from '../db';
-import User from './user'; 
+import User from './user';
 
 const TABLE_NAME = 'roles';
 
@@ -24,9 +24,9 @@ class Role extends db.Model {
   /**
    *  Relationship with the User model (many-to-many).
    */
-    users() {
-      return this.belongsToMany(User, 'roles_to_users', 'role_id', 'user_id');
-    }
+  users() {
+    return this.belongsToMany(User, 'roles_to_users', 'role_id', 'user_id');
+  }
 }
 
 export default Role;
