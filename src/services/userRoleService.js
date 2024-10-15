@@ -12,12 +12,14 @@ import User from '../models/user';
  */
 export async function updateRoles(userId, { roles }) {
   const user = await new User({ id: userId }).fetch({ require: false });
+
   if (!user) {
     throw Boom.notFound('User not found');
   }
 
   // Validate roles: Check if the role IDs exist in the roles table
   const validRoles = await new Role().where('id', 'in', roles).fetchAll();
+
   if (validRoles.length !== roles.length) {
     throw Boom.badRequest('Some roles are invalid.');
   }
@@ -38,11 +40,13 @@ export async function updateRoles(userId, { roles }) {
  */
 export async function removeUserRole(userId, roleId) {
   const user = await new User({ id: userId }).fetch({ require: false });
+
   if (!user) {
     throw Boom.notFound('User not found');
   }
 
   const role = await new Role({ id: roleId }).fetch({ require: false });
+
   if (!role) {
     throw Boom.notFound('Role not found');
   }

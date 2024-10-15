@@ -1,3 +1,4 @@
+import Boom from '@hapi/boom';
 import jwt from 'jsonwebtoken';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
@@ -32,10 +33,11 @@ export function generateRefreshToken(payload) {
  * @param {String} refreshToken - The refresh token provided by the user.
  * @returns {Promise<String>} - Returns a new access token.
  */
-export async function generateRefreshAccessToken(refreshToken) {
+export function generateRefreshAccessToken(refreshToken) {
   try {
     const payload = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
     const newAccessToken = generateAccessToken({ id: payload.id, username: payload.username });
+
     return newAccessToken;
   } catch (error) {
     throw Boom.unauthorized('Invalid refresh token');

@@ -1,7 +1,7 @@
 import rateLimit from 'express-rate-limit';
 
 /**
- * Set up rate limiter: maximum of 5 requests per minute
+ * Set up rate limiter: maximum of 5 requests per minute.
  */
 export const rateLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute duration

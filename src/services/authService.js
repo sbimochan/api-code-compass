@@ -7,9 +7,11 @@ import { generateAccessToken, generateRefreshToken, generateRefreshAccessToken }
 /**
  * Login user by validating username and password.
  *
- * @param {String} username
- * @param {String} password
- * @returns {Promise<Object>} - Returns the user object, access token, and refresh token.
+ * @param {Object} credentials - The login credentials.
+ * @param {string} credentials.username - The username of the user.
+ * @param {string} credentials.password - The password of the user.
+ * @returns {Promise<Object>} A promise that resolves to the login result,
+ * including user information and authentication token.
  */
 export async function login({ username, password }) {
   const user = await new User().where({ username }).fetch({ require: false });
@@ -37,5 +39,6 @@ export async function login({ username, password }) {
  */
 export async function refreshAccessToken({ refreshToken }) {
   const token = await generateRefreshAccessToken(refreshToken);
+
   return { accessToken: token };
 }
