@@ -3,7 +3,7 @@ import HttpStatus from 'http-status-codes';
 import * as authService from '../services/authService';
 
 /**
- * User login
+ * User login.
  *
  * @param {Object} req
  * @param {Object} res
@@ -17,7 +17,7 @@ export function login(req, res, next) {
 }
 
 /**
- * User requesting new access token with refresh token
+ * User requesting new access token with refresh token.
  *
  * @param {Object} req
  * @param {Object} res

@@ -13,7 +13,7 @@ const refreshTokenSchema = Joi.object({
 });
 
 /**
- * Validate login request
+ * Validate login request.
  *
  * @param   {Object}   req
  * @param   {Object}   res
@@ -27,7 +27,7 @@ function loginValidator(req, res, next) {
 }
 
 /**
- * Validate refresh access token request
+ * Validate refresh access token request.
  *
  * @param   {Object}   req
  * @param   {Object}   res

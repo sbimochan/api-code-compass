@@ -3,7 +3,7 @@ import HttpStatus from 'http-status-codes';
 import * as userRoleService from '../services/userRoleService';
 
 /**
- * Update user roles
+ * Update user roles.
  *
  * @param {Object} req
  * @param {Object} res
@@ -17,7 +17,7 @@ export function updateRoles(req, res, next) {
 }
 
 /**
- * Delete user role with roleId
+ * Delete user role with roleId.
  *
  * @param {Object} req
  * @param {Object} res

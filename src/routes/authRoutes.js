@@ -8,18 +8,18 @@ import { loginValidator, refreshTokenValidator } from '../validators/authValidat
 const router = Router();
 
 /**
- * POST /api/login
+ * POST /api/login.
  */
 router.post('/login', rateLimiter, loginValidator, authController.login);
 
 /**
- * POST /api/token/refresh
+ * POST /api/token/refresh.
  */
 router.post('/token/refresh', rateLimiter, refreshTokenValidator, authController.refreshAccessToken);
 
 /**
  * Example
- * GET /api/protected
+ * GET /api/protected.
  */
 router.get('/protected', rateLimiter, authenticateToken, (req, res) => {
   res.json({
