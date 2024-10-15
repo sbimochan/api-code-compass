@@ -1,5 +1,6 @@
 import db from '../db';
 import Rent from './rent';
+import Role from './role';
 
 const TABLE_NAME = 'users';
 
@@ -26,6 +27,13 @@ class User extends db.Model {
    */
   rents() {
     return this.hasMany(Rent);
+  }
+
+  /**
+   *  Relationship with the Role model (many-to-many).
+   */
+  roles() {
+    return this.belongsToMany(Role, 'roles_to_users', 'user_id', 'role_id');
   }
 }
 
