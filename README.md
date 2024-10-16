@@ -65,7 +65,7 @@ Example,
 
 Use [docker-compose](https://docs.docker.com/compose/) to quickly bring up a stack with pre-configured Postgres database container. Data is ephemeral and containers will disappear when stack is removed.
 
-Specific configuration for Docker is in `.env.docker`
+Update `.env` file accordingly.
 
 - `0.0.0.0` as `$APP_HOST` to expose app on Docker network interface
 - Pre-configured Postgres settings - can be updated to point to another Postgres host
