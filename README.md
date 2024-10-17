@@ -145,6 +145,12 @@ Run tests with coverage.
 
     $ yarn test:coverage
 
+## Postman Collection
+
+The postman collection consists of series of tests for this API.
+
+[Click here](https://api-code-compass.postman.co/workspace/API-Code-Compass-Workspace~c9caec1f-bc5c-44c0-8183-4826d8606984/collection/27851431-0a08f0a1-6e96-4fd4-aa88-801b65e4578b?action=share&creator=27851431&active-environment=27851431-0b2e00d4-2886-4a9a-ab71-9114b92c9c9a)
+
 ## Why 8848?
 
 Because the highest point in the world is [8848 meters](https://en.wikipedia.org/wiki/Mount_Everest).
