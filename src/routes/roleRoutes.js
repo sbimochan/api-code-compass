@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as roleController from '../controllers/roles';
+import * as roleController from '../controllers/rolesController';
 import { findRole, roleValidator } from '../validators/roleValidator';
 
 const router = Router();
@@ -16,9 +16,9 @@ router.get('/', roleController.fetchAll);
 router.post('/', roleValidator, roleController.create);
 
 /**
- * PATCH /api/roles/:id.
+ * PUT /api/roles/:id.
  */
-router.patch('/:id', findRole, roleValidator, roleController.update);
+router.put('/:id', findRole, roleValidator, roleController.update);
 
 /**
  * DELETE /api/roles/:id.
