@@ -1,15 +1,15 @@
 import { Router } from 'express';
 
-import * as userRoleController from '../controllers/userRole';
+import * as userRoleController from '../controllers/userRoleController';
 import { userRoleValidator } from '../validators/userRoleValidator';
 
 const router = Router();
 
 /**
- * PATCH /api/user/:userId/roles.
+ * PUT /api/user/:userId/roles.
  *
  */
-router.patch('/:userId/roles', userRoleValidator, userRoleController.updateRoles);
+router.put('/:userId/roles', userRoleValidator, userRoleController.updateRoles);
 
 /**
  * DELETE /api/user/:userId/roles/:roleId.

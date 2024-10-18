@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { rateLimiter } from '../middlewares/rateLimiter';
-import * as authController from '../controllers/auth';
+import * as authController from '../controllers/authController';
 import { authenticateToken } from '../middlewares/authenticateToken';
 import { loginValidator, refreshTokenValidator } from '../validators/authValidator';
 
