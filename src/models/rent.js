@@ -1,4 +1,4 @@
-import db from '../db';
+import db from '@/db';
 
 const TABLE_NAME = 'rents';
 
@@ -33,7 +33,6 @@ class Rent extends db.Model {
   customer() {
     return this.belongsTo('Customer');
   }
-
 }
 
 export default Rent;
