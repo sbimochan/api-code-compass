@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
 import Boom from '@hapi/boom';
+import jwt from 'jsonwebtoken';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 

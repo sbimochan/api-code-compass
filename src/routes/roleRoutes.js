@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import * as roleController from '../controllers/roles';
-import { findRole, roleValidator } from '../validators/roleValidator';
+import * as roleController from '@/controllers/roles';
+
+import { findRole, roleValidator } from '@/validators/roleValidator';
 
 const router = Router();
 

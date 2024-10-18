@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+
 import { buildMeta } from '../../src/utils/pagination';
 
 describe('buildMeta', () => {
@@ -12,7 +13,7 @@ describe('buildMeta', () => {
       page: 1,
       pageSize: 10,
       total: 50,
-      totalPages: 5,
+      totalPages: 5
     });
   });
 
@@ -26,7 +27,7 @@ describe('buildMeta', () => {
       page: 2,
       pageSize: 3,
       total: 10,
-      totalPages: 4,
+      totalPages: 4
     });
   });
 
@@ -40,7 +41,7 @@ describe('buildMeta', () => {
       page: 1,
       pageSize: 10,
       total: 0,
-      totalPages: 0,
+      totalPages: 0
     });
   });
 
@@ -54,7 +55,7 @@ describe('buildMeta', () => {
       page: 1,
       pageSize: 10,
       total: 5,
-      totalPages: 1,
+      totalPages: 1
     });
   });
 
@@ -68,7 +69,7 @@ describe('buildMeta', () => {
       page: 100,
       pageSize: 20,
       total: 1000,
-      totalPages: 50,
+      totalPages: 50
     });
   });
 });

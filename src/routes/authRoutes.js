@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
-import { rateLimiter } from '../middlewares/rateLimiter';
-import * as authController from '../controllers/auth';
-import { authenticateToken } from '../middlewares/authenticateToken';
-import { loginValidator, refreshTokenValidator } from '../validators/authValidator';
+import * as authController from '@/controllers/auth';
+
+import { rateLimiter } from '@/middlewares/rateLimiter';
+import { authenticateToken } from '@/middlewares/authenticateToken';
+
+import { loginValidator, refreshTokenValidator } from '@/validators/authValidator';
 
 const router = Router();
 

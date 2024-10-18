@@ -1,10 +1,12 @@
 {
-  "presets": [
+  "presets": ["@babel/preset-env"],
+  "plugins": [
     [
-      "@babel/preset-env",
+      "module-resolver",
       {
-        "targets": {
-          "node": "current"
+        "root": ["./src"],
+        "alias": {
+          "@": "./src"
         }
       }
     ]
