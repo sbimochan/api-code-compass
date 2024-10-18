@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import * as moviesController from '../controllers/moviesController';
-import { createMovieValidator, findMovie, updateMovieValidator } from '../validators/movieValidator';
+import { movieValidator, findMovie } from '../validators/movieValidator';
 
 const router = Router();
 
@@ -18,12 +18,12 @@ router.get('/:id', moviesController.fetchById);
 /**
  * POST /api/movies.
  */
-router.post('/', createMovieValidator, moviesController.create);
+router.post('/', movieValidator, moviesController.create);
 
 /**
- * PATCH /api/movies/:id.
+ * PUT /api/movies/:id.
  */
-router.patch('/:id', findMovie, updateMovieValidator, moviesController.update);
+router.put('/:id', findMovie, movieValidator, moviesController.update);
 
 /**
  * DELETE /api/movies/:id.

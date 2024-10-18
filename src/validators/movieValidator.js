@@ -17,24 +17,10 @@ const schema = Joi.object({
  * @param   {Object}   _
  * @param   {Function} next
  */
-function createMovieValidator(req, _, next) {
+function movieValidator(req, _, next) {
   const createSchema = schema.fork(Object.keys(schema.describe().keys), (field) => field.required());
 
   return validate(req.body, createSchema)
-    .then(() => next())
-    .catch((err) => next(err));
-}
-
-/**
- * Validate update movie request.
- *
- * @param {Object} req
- * @param {Object} _
- * @param {Function} next
- */
-function updateMovieValidator(req, _, next) {
-  // At least one field is required for update operation
-  return validate(req.body, schema.min(1))
     .then(() => next())
     .catch((err) => next(err));
 }
@@ -53,4 +39,4 @@ function findMovie(req, _, next) {
     .catch((err) => next(err));
 }
 
-export { createMovieValidator, updateMovieValidator, findMovie };
+export { movieValidator, findMovie };
