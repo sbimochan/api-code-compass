@@ -5,7 +5,6 @@ import roleRoutes from './routes/roleRoutes';
 import authRoutes from './routes/authRoutes';
 import movieRoutes from './routes/movieRoutes';
 import rentalRoutes from './routes/rentalRoutes';
-import userRoleRoutes from './routes/userRoleRoutes';
 
 import swaggerSpec from '@utils/swagger';
 
@@ -17,7 +16,7 @@ const router = Router();
 /**
  * GET /api/swagger.json.
  */
-router.get('/swagger.json', (req, res) => {
+router.get('/swagger.json', (_, res) => {
   res.json(swaggerSpec);
 });
 
@@ -31,11 +30,11 @@ router.get('/', (req, res) => {
   });
 });
 
+router.use('/auth', authRoutes);
+
 router.use('/users', userRoutes);
+router.use('/roles', roleRoutes);
 router.use('/movies', movieRoutes);
 router.use('/rents', rentalRoutes);
-router.use('/roles', roleRoutes);
-router.use('/user', userRoleRoutes);
-router.use('/', authRoutes);
 
 export default router;

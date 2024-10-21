@@ -1,8 +1,8 @@
 import Boom from '@hapi/boom';
-import bcrypt from 'bcryptjs';
 
 import User from '@models/user';
 
+import { comparePassword } from '@/utils/bcrypt';
 import { generateAccessToken, generateRefreshToken, generateRefreshAccessToken } from '@utils/jwt';
 
 /**
@@ -17,7 +17,7 @@ import { generateAccessToken, generateRefreshToken, generateRefreshAccessToken }
 export async function login({ username, password }) {
   const user = await new User().where({ username }).fetch({ require: false });
 
-  if (!user || !(await bcrypt.compare(password, user.get('password')))) {
+  if (!user || !comparePassword(password, user.get('password'))) {
     throw Boom.unauthorized('Invalid username or password');
   }
 
@@ -26,7 +26,6 @@ export async function login({ username, password }) {
   const refreshToken = generateRefreshToken({ id: user.get('id'), username: user.get('username') });
 
   return {
-    user: user.pick(['id', 'username']),
     accessToken,
     refreshToken
   };
@@ -41,5 +40,5 @@ export async function login({ username, password }) {
 export async function refreshAccessToken({ refreshToken }) {
   const token = await generateRefreshAccessToken(refreshToken);
 
-  return { accessToken: token };
+  return { accessToken: token, refreshToken };
 }

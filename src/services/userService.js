@@ -1,5 +1,7 @@
 import Boom from '@hapi/boom';
 
+import { hashPassword } from '@/utils/bcrypt';
+
 import User from '@models/user';
 
 /**
@@ -8,7 +10,7 @@ import User from '@models/user';
  * @returns {Promise}
  */
 export function getAllUsers() {
-  return User.fetchAll();
+  return User.fetchAll().then((users) => users.map((user) => user.filterSensitiveData()));
 }
 
 /**
@@ -20,7 +22,7 @@ export function getAllUsers() {
 export function getUser(id) {
   return new User({ id })
     .fetch()
-    .then((user) => user)
+    .then((user) => user.filterSensitiveData())
     .catch(User.NotFoundError, () => {
       throw Boom.notFound('User not found');
     });
@@ -33,12 +35,16 @@ export function getUser(id) {
  * @returns {Promise}
  */
 export function createUser(user) {
+  const hashedPassword = hashPassword(user.password);
+
   return new User({
     username: user.username,
     fullName: user.fullName,
-    password: user.password,
+    password: hashedPassword,
     email: user.email
-  }).save();
+  })
+    .save()
+    .then((user) => user.filterSensitiveData());
 }
 
 /**
@@ -49,13 +55,15 @@ export function createUser(user) {
  * @returns {Promise}
  */
 export function updateUser(id, user) {
-  return new User({ id }).save({
-    username: user.username,
-    fullName: user.fullName,
-    password: user.password,
-    email: user.email,
-    isAdmin: user.isAdmin
-  });
+  return new User({ id })
+    .save({
+      username: user.username,
+      fullName: user.fullName,
+      password: user.password,
+      email: user.email,
+      isAdmin: user.isAdmin
+    })
+    .then((user) => user.filterSensitiveData());
 }
 
 /**

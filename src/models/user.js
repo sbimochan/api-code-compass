@@ -1,3 +1,5 @@
+import omit from 'lodash/omit';
+
 import db from '@/db';
 
 import Rent from './rent';
@@ -35,6 +37,17 @@ class User extends db.Model {
    */
   roles() {
     return this.belongsToMany(Role, 'roles_to_users', 'user_id', 'role_id');
+  }
+
+  /**
+   * Filter sensitive data.
+   */
+  filterSensitiveData() {
+    const attrs = this.toJSON();
+
+    const user = omit(attrs, ['password']);
+
+    return user;
   }
 }
 
