@@ -43,7 +43,7 @@
   "author": "Bimochan Shrestha <bmochan@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "^9.1.4",
+    "@hapi/boom": "^10.0.1",
     "@hapi/joi": "^17.1.1",
     "@sentry/node": "^6.13.2",
     "bcryptjs": "^2.4.3",
