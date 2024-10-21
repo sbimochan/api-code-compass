@@ -1,3 +1,4 @@
+import './instrument';
 import './env';
 import './db';
 
@@ -19,10 +20,6 @@ import * as errorHandler from '@middlewares/errorHandler';
 
 import logger, { logStream } from '@utils/logger';
 
-// Initialize Sentry
-// https://docs.sentry.io/platforms/node/express/
-Sentry.init({ dsn: process.env.SENTRY_DSN });
-
 const app = express();
 
 const APP_PORT =
@@ -36,9 +33,6 @@ app.set('host', APP_HOST);
 
 app.locals.title = process.env.APP_NAME;
 app.locals.version = process.env.APP_VERSION;
-
-// This request handler must be the first middleware on the app
-app.use(Sentry.Handlers.requestHandler());
 
 app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
 app.use(cors());
@@ -63,9 +57,6 @@ const swaggerIndexContent = fs
 app.get('/api-docs/index.html', (req, res) => res.send(swaggerIndexContent));
 app.get('/api-docs', (req, res) => res.redirect('/api-docs/index.html'));
 app.use('/api-docs', express.static(pathToSwaggerUi));
-
-// This error handler must be before any other error middleware
-app.use(Sentry.Handlers.errorHandler());
 
 // Error Middleware
 app.use(errorHandler.genericErrorHandler);
