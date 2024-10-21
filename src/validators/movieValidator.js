@@ -1,7 +1,8 @@
 import Joi from '@hapi/joi';
 
-import validate from '../utils/validate';
-import * as movieService from '../services/movieService';
+import * as movieService from '@services/movieService';
+
+import validate from '@utils/validate';
 
 const schema = Joi.object({
   name: Joi.string().label('Title').max(90),

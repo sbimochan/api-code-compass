@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import * as moviesController from '../controllers/moviesController';
-import { movieValidator, findMovie } from '../validators/movieValidator';
+import * as moviesController from '@controllers/moviesController';
+
+import { movieValidator, findMovie } from '@validators/movieValidator';
 
 const router = Router();
 

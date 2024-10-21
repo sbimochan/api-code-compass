@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import * as userRoleController from '../controllers/userRoleController';
-import { userRoleValidator } from '../validators/userRoleValidator';
+import * as userRoleController from '@controllers/userRoleController';
+
+import { userRoleValidator } from '@validators/userRoleValidator';
 
 const router = Router();
 

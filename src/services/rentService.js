@@ -1,5 +1,6 @@
 import Boom from '@hapi/boom';
-import Rent from '../models/rent';
+
+import Rent from '@models/rent';
 
 /**
  * Create new rent.

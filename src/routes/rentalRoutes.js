@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import * as rentsController from '../controllers/rentsController';
-import { validateToCreateRent } from '../validators/rentValidator';
+import * as rentsController from '@controllers/rentsController';
+
+import { validateToCreateRent } from '@validators/rentValidator';
 
 const router = Router();
 

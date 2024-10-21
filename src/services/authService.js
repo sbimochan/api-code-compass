@@ -1,8 +1,9 @@
 import Boom from '@hapi/boom';
 import bcrypt from 'bcryptjs';
 
-import User from '../models/user';
-import { generateAccessToken, generateRefreshToken, generateRefreshAccessToken } from '../utils/jwt';
+import User from '@models/user';
+
+import { generateAccessToken, generateRefreshToken, generateRefreshAccessToken } from '@utils/jwt';
 
 /**
  * Login user by validating username and password.

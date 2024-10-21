@@ -13,9 +13,11 @@ import compression from 'compression';
 import * as Sentry from '@sentry/node';
 
 import routes from './routes';
-import json from './middlewares/json';
-import logger, { logStream } from './utils/logger';
-import * as errorHandler from './middlewares/errorHandler';
+
+import json from '@middlewares/json';
+import * as errorHandler from '@middlewares/errorHandler';
+
+import logger, { logStream } from '@utils/logger';
 
 // Initialize Sentry
 // https://docs.sentry.io/platforms/node/express/
