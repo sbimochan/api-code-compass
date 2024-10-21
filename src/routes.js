@@ -1,12 +1,13 @@
 import { Router } from 'express';
 
-import swaggerSpec from './utils/swagger';
 import userRoutes from './routes/userRoutes';
 import roleRoutes from './routes/roleRoutes';
 import authRoutes from './routes/authRoutes';
 import movieRoutes from './routes/movieRoutes';
 import rentalRoutes from './routes/rentalRoutes';
 import userRoleRoutes from './routes/userRoleRoutes';
+
+import swaggerSpec from '@utils/swagger';
 
 /**
  * Contains all API routes for the application.

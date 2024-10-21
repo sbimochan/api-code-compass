@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as authService from '../services/authService';
+import * as authService from '@services/authService';
 
 /**
  * User login.

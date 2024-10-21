@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 
-import Role from '../models/role';
+import Role from '@models/role';
 
 /**
  * Get all roles.

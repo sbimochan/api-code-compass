@@ -1,7 +1,8 @@
 import Joi from '@hapi/joi';
 
-import validate from '../utils/validate';
-import * as userService from '../services/userService';
+import * as userService from '@services/userService';
+
+import validate from '@utils/validate';
 
 // Validation schema
 const schema = Joi.object({
@@ -23,7 +24,7 @@ const schema = Joi.object({
 function userValidator(req, res, next) {
   return validate(req.body, schema)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err) => next(err));
 }
 
 /**
@@ -38,7 +39,7 @@ function findUser(req, res, next) {
   return userService
     .getUser(req.params.id)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err) => next(err));
 }
 
 export { findUser, userValidator };

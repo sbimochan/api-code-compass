@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import * as usersController from '../controllers/usersController';
-import { findUser, userValidator } from '../validators/userValidator';
+import * as usersController from '@controllers/usersController';
+
+import { findUser, userValidator } from '@validators/userValidator';
 
 const router = Router();
 

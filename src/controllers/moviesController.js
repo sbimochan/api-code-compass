@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as movieService from '../services/movieService';
+import * as movieService from '@services/movieService';
 
 /**
  * Get all movies.

@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as userRoleService from '../services/userRoleService';
+import * as userRoleService from '@services/userRoleService';
 
 /**
  * Update user roles.

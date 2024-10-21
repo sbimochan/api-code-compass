@@ -1,7 +1,8 @@
 import Joi from '@hapi/joi';
 
-import validate from '../utils/validate';
-import * as roleService from '../services/roleService';
+import * as roleService from '@services/roleService';
+
+import validate from '@utils/validate';
 
 // Validation schema
 const schema = Joi.object({
