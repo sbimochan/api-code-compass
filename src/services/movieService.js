@@ -1,7 +1,8 @@
 import Boom from '@hapi/boom';
 
-import Movie from '../models/movie';
-import { buildMeta } from '../utils/pagination';
+import Movie from '@models/movie';
+
+import { buildMeta } from '@utils/pagination';
 
 /**
  * Get all movies.

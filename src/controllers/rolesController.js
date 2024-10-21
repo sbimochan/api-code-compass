@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as roleService from '../services/roleService';
+import * as roleService from '@services/roleService';
 
 /**
  * Get all roles.
@@ -12,8 +12,8 @@ import * as roleService from '../services/roleService';
 export function fetchAll(req, res, next) {
   roleService
     .getAllRoles()
-    .then(data => res.json({ data }))
-    .catch(err => next(err));
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
 }
 
 /**
@@ -26,8 +26,8 @@ export function fetchAll(req, res, next) {
 export function create(req, res, next) {
   roleService
     .createRole(req.body)
-    .then(data => res.status(HttpStatus.CREATED).json({ data }))
-    .catch(err => next(err));
+    .then((data) => res.status(HttpStatus.CREATED).json({ data }))
+    .catch((err) => next(err));
 }
 
 /**
@@ -40,8 +40,8 @@ export function create(req, res, next) {
 export function update(req, res, next) {
   roleService
     .updateRole(req.params.id, req.body)
-    .then(data => res.json({ data }))
-    .catch(err => next(err));
+    .then((data) => res.json({ data }))
+    .catch((err) => next(err));
 }
 
 /**
@@ -54,6 +54,6 @@ export function update(req, res, next) {
 export function deleteRole(req, res, next) {
   roleService
     .deleteRole(req.params.id)
-    .then(data => res.status(HttpStatus.NO_CONTENT).json({ data }))
-    .catch(err => next(err));
+    .then((data) => res.status(HttpStatus.NO_CONTENT).json({ data }))
+    .catch((err) => next(err));
 }
