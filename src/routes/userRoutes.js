@@ -1,5 +1,7 @@
 import { Router } from 'express';
 
+import userRoleRoutes from './userRoleRoutes';
+
 import * as usersController from '@controllers/usersController';
 
 import { findUser, userValidator } from '@validators/userValidator';
@@ -30,5 +32,10 @@ router.put('/:id', findUser, userValidator, usersController.update);
  * DELETE /api/users/:id.
  */
 router.delete('/:id', findUser, usersController.deleteUser);
+
+/**
+ * Routes for user roles.
+ */
+router.use('/', userRoleRoutes);
 
 export default router;
