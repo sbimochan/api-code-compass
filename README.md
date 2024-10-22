@@ -1,4 +1,4 @@
-[![Codecov](https://codecov.io/gh/sbimochan/api-code-compass/branch/master/graph/badge.svg)](https://codecov.io/gh/sbimochan/api-code-compass)
+[![codecov](https://codecov.io/gh/sbimochan/api-code-compass/branch/dev/graph/badge.svg?token=DI53MR3LK0)](https://codecov.io/gh/sbimochan/api-code-compass)
 
 Comes with:
 
