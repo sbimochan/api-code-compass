@@ -1,11 +1,24 @@
 name: Run tests and upload coverage
-
 on: push
 
 jobs:
   test:
     name: Run tests and collect coverage
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,6 +35,15 @@ jobs:
 
       - name: Run lint
         run: yarn lint
+
+      - name: Wait for Postgres to be ready
+        run: |
+          until pg_isready -h 127.0.0.1 -p 5432; do
+            echo "Waiting for Postgres..."
+            sleep 5
+          done
+      - name: Run Test DB migration
+        run: NODE_ENV=test yarn migrate
 
       - name: Run tests
         run: yarn test:coverage
