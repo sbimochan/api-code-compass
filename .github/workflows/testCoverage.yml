@@ -11,9 +11,9 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_USER: test_user
-          POSTGRES_PASSWORD: test_password
-          POSTGRES_DB: test_db
+          POSTGRES_USER: ${{secrets.TEST_DB_USER}}
+          POSTGRES_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
+          POSTGRES_DB: $TEST_DB
         options: >-
           --health-cmd="pg_isready"
           --health-interval=10s
@@ -47,6 +47,9 @@ jobs:
         env:
           NODE_ENV: test
           DB_CLIENT: postgres
+          TEST_DB  : $TEST_DB
+          TEST_DB_USER: ${{secrets.TEST_DB_USER}}
+          TEST_DB_PASSWORD: ${{secrets.TEST_DB_PASSWORD}}
 
       - name: Run tests
         run: yarn test:coverage
