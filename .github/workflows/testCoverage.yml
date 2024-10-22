@@ -43,7 +43,9 @@ jobs:
             sleep 5
           done
       - name: Run Test DB migration
-        run: NODE_ENV=test yarn migrate
+        run: yarn migrate
+        env:
+          NODE_ENV: test
 
       - name: Run tests
         run: yarn test:coverage
