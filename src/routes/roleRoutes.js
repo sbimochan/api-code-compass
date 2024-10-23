@@ -4,7 +4,7 @@ import * as roleController from '@controllers/rolesController';
 
 import { authorize } from '@middlewares/authorize';
 
-import { findRole, roleValidator } from '@validators/roleValidator';
+import { roleValidator } from '@validators/roleValidator';
 
 const router = Router();
 
@@ -21,11 +21,11 @@ router.post('/', authorize('role.create'), roleValidator, roleController.create)
 /**
  * PUT /api/roles/:id.
  */
-router.put('/:id', authorize('role.update'), findRole, roleValidator, roleController.update);
+router.put('/:id', authorize('role.update'), roleValidator, roleController.update);
 
 /**
  * DELETE /api/roles/:id.
  */
-router.delete('/:id', authorize('role.delete'), findRole, roleController.deleteRole);
+router.delete('/:id', authorize('role.delete'), roleController.deleteRole);
 
 export default router;
