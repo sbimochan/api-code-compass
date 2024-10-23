@@ -44,7 +44,7 @@ export function createRole(role) {
  * @returns {Promise}
  */
 export function updateRole(id, role) {
-  return new Role({ id }).save({ name: role.name, description: role.description });
+  return getRole(id).then(new Role({ id }).save({ name: role.name, description: role.description }));
 }
 
 /**
@@ -54,5 +54,5 @@ export function updateRole(id, role) {
  * @returns {Promise}
  */
 export function deleteRole(id) {
-  return new Role({ id }).fetch().then((role) => role.destroy());
+  return getRole(id).then(new Role({ id }).fetch().then((role) => role.destroy()));
 }

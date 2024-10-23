@@ -10,12 +10,12 @@ import { loginValidator, refreshTokenValidator } from '@validators/authValidator
 const router = Router();
 
 /**
- * POST /api/login.
+ * POST /api/auth/login.
  */
 router.post('/login', rateLimiter, loginValidator, authController.login);
 
 /**
- * POST /api/token/refresh.
+ * POST /api/auth/token/refresh.
  */
 router.post('/token/refresh', rateLimiter, refreshTokenValidator, authController.refreshAccessToken);
 
