@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 import * as roleController from '@controllers/rolesController';
 
+import { authorize } from '@middlewares/authorize';
+
 import { findRole, roleValidator } from '@validators/roleValidator';
 
 const router = Router();
@@ -9,21 +11,21 @@ const router = Router();
 /**
  * GET /api/roles.
  */
-router.get('/', roleController.fetchAll);
+router.get('/', authorize('role.read'), roleController.fetchAll);
 
 /**
  * POST /api/roles.
  */
-router.post('/', roleValidator, roleController.create);
+router.post('/', authorize('role.create'), roleValidator, roleController.create);
 
 /**
  * PUT /api/roles/:id.
  */
-router.put('/:id', findRole, roleValidator, roleController.update);
+router.put('/:id', authorize('role.update'), findRole, roleValidator, roleController.update);
 
 /**
  * DELETE /api/roles/:id.
  */
-router.delete('/:id', findRole, roleController.deleteRole);
+router.delete('/:id', authorize('role.delete'), findRole, roleController.deleteRole);
 
 export default router;

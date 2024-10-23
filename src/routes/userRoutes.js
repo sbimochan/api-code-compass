@@ -4,6 +4,8 @@ import userRoleRoutes from './userRoleRoutes';
 
 import * as usersController from '@controllers/usersController';
 
+import { authorize } from '@middlewares/authorize';
+
 import { findUser, userValidator } from '@validators/userValidator';
 
 const router = Router();
@@ -11,27 +13,27 @@ const router = Router();
 /**
  * GET /api/users.
  */
-router.get('/', usersController.fetchAll);
+router.get('/', authorize('user.read'), usersController.fetchAll);
 
 /**
  * GET /api/users/:id.
  */
-router.get('/:id', usersController.fetchById);
+router.get('/:id', authorize('user.read'), usersController.fetchById);
 
 /**
  * POST /api/users.
  */
-router.post('/', userValidator, usersController.create);
+router.post('/', authorize('user.create'), userValidator, usersController.create);
 
 /**
  * PUT /api/users/:id.
  */
-router.put('/:id', findUser, userValidator, usersController.update);
+router.put('/:id', authorize('user.update'), findUser, userValidator, usersController.update);
 
 /**
  * DELETE /api/users/:id.
  */
-router.delete('/:id', findUser, usersController.deleteUser);
+router.delete('/:id', authorize('user.delete'), findUser, usersController.deleteUser);
 
 /**
  * Routes for user roles.

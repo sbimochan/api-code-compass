@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import Boom from '@hapi/boom';
 
+import User from '@models/user';
+
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 /**
@@ -19,11 +21,19 @@ export function authenticateToken(req, res, next) {
     return next(Boom.unauthorized('Token not provided'));
   }
 
-  jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
+  jwt.verify(token, ACCESS_TOKEN_SECRET, async (err, tokenUser) => {
     if (err) {
       return next(Boom.unauthorized('Invalid or expired token'));
     }
-    req.user = user;
+
+    const user = await User.where({ id: tokenUser.id }).fetch({ withRelated: ['roles'] });
+
+    if (!user) {
+      return next(Boom.unauthorized('User not found'));
+    }
+
+    req.user = user.filterSensitiveData();
+
     next();
   });
 }

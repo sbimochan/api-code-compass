@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 import * as rentsController from '@controllers/rentsController';
 
+import { authorize } from '@middlewares/authorize';
+
 import { validateToCreateRent } from '@validators/rentValidator';
 
 const router = Router();
@@ -9,12 +11,12 @@ const router = Router();
 /**
  * POST /api/rents.
  */
-router.post('/', validateToCreateRent, rentsController.create);
+router.post('/', authorize('rental.create'), validateToCreateRent, rentsController.create);
 
 /**
  * GET /api/rents/:id.
  */
-router.get('/:id', rentsController.fetchById);
+router.get('/:id', authorize('rental.read'), rentsController.fetchById);
 
 // Lets not create fetchAll and other routes until necessary
 

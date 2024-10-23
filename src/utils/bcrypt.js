@@ -1,6 +1,6 @@
 import { hashSync, compareSync } from 'bcryptjs';
 
-import { SALT } from '@/constants/bcrypt';
+import { SALT } from '@constants/bcrypt';
 
 /**
  * Hash a password.
