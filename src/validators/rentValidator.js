@@ -8,8 +8,7 @@ const schema = Joi.object({
   movieId: Joi.number().label('Movie ID').max(90).required(),
   startDate: Joi.date().label('Start Date').required(),
   dueDate: Joi.date().label('Due Date').required(),
-  returnedDate: Joi.date().allow(null).label('Returned Date'),
-  issuedBy: Joi.number().label('Issuer ID').max(90).required()
+  returnedDate: Joi.date().allow(null).label('Returned Date')
 });
 
 /**
