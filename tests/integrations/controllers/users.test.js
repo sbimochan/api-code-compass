@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { hashSync } from 'bcryptjs';
 
 import app from '../../../src/index';
 import bookshelf from '../../../src/db';
+import { hashPassword } from '@utils/bcrypt';
 
 /**
  * Tests for '/api/users'.
@@ -22,7 +22,7 @@ describe('Users Controller Test', () => {
         // Insert the admin user
         return bookshelf.knex('users').insert({
           username: TEMP_USERNAME,
-          password: hashSync(TEMP_PASSWORD, 8),
+          password: hashPassword(TEMP_PASSWORD),
           is_admin: true,
           full_name: 'Test Administrator',
           email: 'admin@example.com'
