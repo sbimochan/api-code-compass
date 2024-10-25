@@ -1,5 +1,5 @@
 export const permissions = {
-  superAdmin: [
+  admin: [
     'user.create',
     'user.read',
     'user.update',
@@ -8,21 +8,6 @@ export const permissions = {
     'role.read',
     'role.update',
     'role.delete',
-    'movie.create',
-    'movie.read',
-    'movie.update',
-    'movie.delete',
-    'rental.create',
-    'rental.read',
-    'rental.update',
-    'rental.delete'
-  ],
-  admin: [
-    'user.create',
-    'user.read',
-    'user.update',
-    'user.delete',
-    'role.read',
     'movie.create',
     'movie.read',
     'movie.update',

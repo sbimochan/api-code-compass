@@ -11,7 +11,7 @@ import * as rentService from '@services/rentService';
  */
 export function create(req, res, next) {
   rentService
-    .createRent(req.body)
+    .createRent(req.user.id, req.body)
     .then((data) => res.status(HttpStatus.CREATED).json({ data }))
     .catch((err) => next(err));
 }

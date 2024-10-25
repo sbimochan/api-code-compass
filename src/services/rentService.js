@@ -5,17 +5,18 @@ import Rent from '@models/rent';
 /**
  * Create new rent.
  *
+ * @param {number} issuedBy
  * @param {Object} rent
  * @returns {Promise}
  */
-export function createRent(rent) {
+export function createRent(issuedBy, rent) {
   return new Rent({
     movieId: rent.movieId,
     userId: rent.userId,
     startDate: rent.startDate,
     dueDate: rent.dueDate,
     returnedDate: rent.returnedDate,
-    issuedBy: rent.issuedBy
+    issuedBy
   }).save();
 }
 

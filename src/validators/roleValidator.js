@@ -1,7 +1,5 @@
 import Joi from '@hapi/joi';
 
-import * as roleService from '@services/roleService';
-
 import validate from '@utils/validate';
 
 // Validation schema
@@ -24,19 +22,4 @@ function roleValidator(req, res, next) {
     .catch((err) => next(err));
 }
 
-/**
- * Validate roles existence.
- *
- * @param   {Object}   req
- * @param   {Object}   res
- * @param   {Function} next
- * @returns {Promise}
- */
-function findRole(req, res, next) {
-  return roleService
-    .getRole(req.params.id)
-    .then(() => next())
-    .catch((err) => next(err));
-}
-
-export { findRole, roleValidator };
+export { roleValidator };
