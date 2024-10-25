@@ -43,7 +43,7 @@ class User extends db.Model {
    * Filter sensitive data.
    */
   filterSensitiveData() {
-    const attrs = this.toJSON();
+    const attrs = this.toJSON({ shallow: false });
 
     const user = omit(attrs, ['password']);
 

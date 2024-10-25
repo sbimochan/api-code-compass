@@ -8,6 +8,8 @@ import rentalRoutes from './routes/rentalRoutes';
 
 import swaggerSpec from '@utils/swagger';
 
+import { authenticateToken } from '@middlewares/authenticateToken';
+
 /**
  * Contains all API routes for the application.
  */
@@ -32,9 +34,9 @@ router.get('/', (req, res) => {
 
 router.use('/auth', authRoutes);
 
-router.use('/users', userRoutes);
-router.use('/roles', roleRoutes);
-router.use('/movies', movieRoutes);
-router.use('/rents', rentalRoutes);
+router.use('/users', authenticateToken, userRoutes);
+router.use('/roles', authenticateToken, roleRoutes);
+router.use('/movies', authenticateToken, movieRoutes);
+router.use('/rents', authenticateToken, rentalRoutes);
 
 export default router;
