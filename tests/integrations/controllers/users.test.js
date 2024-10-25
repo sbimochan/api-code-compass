@@ -1,26 +1,76 @@
 import { expect } from 'chai';
 import request from 'supertest';
+
 import app from '../../../src/index';
 import bookshelf from '../../../src/db';
+import { hashPassword } from '@utils/bcrypt';
 
 /**
  * Tests for '/api/users'.
  */
 describe('Users Controller Test', () => {
+  let accessToken = '';
+  const TEMP_USERNAME = 'admin';
+  const TEMP_PASSWORD = 'hashedPassword';
+
   before((done) => {
     bookshelf.knex
       .raw('TRUNCATE TABLE users RESTART IDENTITY CASCADE')
+      .then(() => bookshelf.knex.raw('TRUNCATE TABLE roles_to_users RESTART IDENTITY CASCADE'))
+      .then(() => bookshelf.knex.raw('TRUNCATE TABLE roles RESTART IDENTITY CASCADE'))
+      .then(() => {
+        // Insert the admin user
+        return bookshelf.knex('users').insert({
+          username: TEMP_USERNAME,
+          password: hashPassword(TEMP_PASSWORD),
+          is_admin: true,
+          full_name: 'Test Administrator',
+          email: 'admin@example.com'
+        });
+      })
+      .then(() => {
+        // Insert roles
+        return bookshelf.knex('roles').insert([
+          { id: 1, name: 'admin', description: 'User with admin role.' },
+          { id: 2, name: 'customer', description: 'User with customer role.' }
+        ]);
+      })
+      .then(() => {
+        // Associate the admin user with the admin role
+        return bookshelf.knex('roles_to_users').insert({
+          role_id: 1, // 'admin' role ID
+          user_id: 1 // admin user ID
+        });
+      })
       .then(() => done())
       .catch((err) => done(err));
+  });
+
+  it('should login user', (done) => {
+    request(app)
+      .post('/api/auth/login')
+      .send({
+        username: TEMP_USERNAME,
+        password: TEMP_PASSWORD
+      })
+      .end((err, res) => {
+        expect(res.status).to.be.equal(200);
+        expect(res.body.data).to.be.an('object');
+        expect(res.body.data).to.have.property('accessToken');
+        expect(res.body.data).to.have.property('refreshToken');
+        accessToken = res.body.data.accessToken;
+        done();
+      });
   });
 
   it('should return list of users', (done) => {
     request(app)
       .get('/api/users')
+      .set('Authorization', `Bearer ${accessToken}`)
       .end((err, res) => {
         expect(res.status).to.be.equal(200);
         expect(res.body.data).to.be.an('array');
-        expect(res.body.data).to.have.lengthOf(0);
+        expect(res.body.data).to.have.lengthOf(1);
 
         done();
       });
@@ -39,6 +89,7 @@ describe('Users Controller Test', () => {
 
     request(app)
       .post('/api/users')
+      .set('Authorization', `Bearer ${accessToken}`)
       .send(user)
       .end((err, res) => {
         const { code, message, details } = res.body.error;
@@ -69,6 +120,7 @@ describe('Users Controller Test', () => {
 
     request(app)
       .post('/api/users')
+      .set('Authorization', `Bearer ${accessToken}`)
       .send(user)
       .end((err, res) => {
         const { data } = res.body;
@@ -90,7 +142,8 @@ describe('Users Controller Test', () => {
 
   it('should get information of user', (done) => {
     request(app)
-      .get('/api/users/1')
+      .get('/api/users/2')
+      .set('Authorization', `Bearer ${accessToken}`)
       .end((err, res) => {
         const { data } = res.body;
 
@@ -110,6 +163,7 @@ describe('Users Controller Test', () => {
   it('should respond with not found error if random user id is provided', (done) => {
     request(app)
       .get('/api/users/1991')
+      .set('Authorization', `Bearer ${accessToken}`)
       .end((err, res) => {
         const { code, message } = res.body.error;
 
@@ -130,7 +184,8 @@ describe('Users Controller Test', () => {
     };
 
     request(app)
-      .put('/api/users/1')
+      .put('/api/users/2')
+      .set('Authorization', `Bearer ${accessToken}`)
       .send(user)
       .end((err, res) => {
         const { data } = res.body;
@@ -152,7 +207,8 @@ describe('Users Controller Test', () => {
     };
 
     request(app)
-      .put('/api/users/1')
+      .put('/api/users/2')
+      .set('Authorization', `Bearer ${accessToken}`)
       .send(user)
       .end((err, res) => {
         const { code, message, details } = res.body.error;
@@ -170,7 +226,8 @@ describe('Users Controller Test', () => {
 
   it('should delete a user if valid id is provided', (done) => {
     request(app)
-      .delete('/api/users/1')
+      .delete('/api/users/2')
+      .set('Authorization', `Bearer ${accessToken}`)
       .end((err, res) => {
         expect(res.status).to.be.equal(204);
 
@@ -181,6 +238,7 @@ describe('Users Controller Test', () => {
   it('should respond with not found error if random user id is provided for deletion', (done) => {
     request(app)
       .delete('/api/users/1991')
+      .set('Authorization', `Bearer ${accessToken}`)
       .end((err, res) => {
         const { code, message } = res.body.error;
 
@@ -197,6 +255,7 @@ describe('Users Controller Test', () => {
 
     request(app)
       .post('/api/users')
+      .set('Authorization', `Bearer ${accessToken}`)
       .send(user)
       .end((err, res) => {
         const { code, message } = res.body.error;
