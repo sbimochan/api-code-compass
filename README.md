@@ -124,8 +124,8 @@ Update these lines in your `.env` file.
 - DB_CLIENT='pg'
 + DB_CLIENT='mysql'
 
-- DB_PORT='5432'
-+ DB_PORT='3306'
+- EXPOSED_DB_PORT='5432'
++ EXPOSED_DB_PORT='3306'
 ```
 
 You can remove the [pg](https://www.npmjs.com/package/pg) driver if you like to.
