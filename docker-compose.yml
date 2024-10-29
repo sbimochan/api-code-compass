@@ -40,7 +40,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
-      - '${DB_PORT}:${DB_PORT}'
+      - '${EXPOSED_DB_PORT}:${DEFAULT_DB_PORT_IN_CONTAINER}'
     networks:
       - express-network
 
@@ -53,7 +53,7 @@ services:
     volumes:
       - pg_test_data:/var/lib/postgresql/data
     ports:
-      - '${TEST_DB_PORT}:${DB_PORT}'
+      - '${EXPOSED_TEST_DB_PORT}:${DEFAULT_DB_PORT_IN_CONTAINER}'
     networks:
       - express-network
 
