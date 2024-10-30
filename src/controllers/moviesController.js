@@ -2,16 +2,20 @@ import HttpStatus from 'http-status-codes';
 
 import * as movieService from '@services/movieService';
 
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '@/constants/constant';
+
 /**
  * Get all movies.
  *
- * @param {Object} _
+ * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
-export function fetchAll(_, res, next) {
+export function fetchAll(req, res, next) {
+  const { page = DEFAULT_PAGE_NUMBER, pageSize = DEFAULT_PAGE_SIZE } = req.query;
+
   movieService
-    .getAllMovies()
+    .getAllMovies({ page: Number(page), pageSize: Number(pageSize) })
     .then((data) => res.json(data))
     .catch((err) => next(err));
 }

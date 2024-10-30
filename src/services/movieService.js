@@ -9,13 +9,17 @@ import { buildMeta } from '@utils/pagination';
  *
  * @returns {Promise}
  */
-export function getAllMovies() {
-  const data = Movie.fetchAll();
+export function getAllMovies({ page, pageSize }) {
+  const offset = (page - 1) * pageSize;
+
+  const data = Movie.query((qb) => {
+    qb.offset(offset).limit(pageSize);
+  }).fetchAll();
+
   const count = Movie.count();
 
-  return Promise.all([data, count]).then(([data, count]) => {
-    // TODO: Implement pagination
-    const meta = buildMeta({ page: 1, pageSize: data.length }, count);
+  return Promise.all([data, count]).then(([data, totalCount]) => {
+    const meta = buildMeta({ page, pageSize }, totalCount);
 
     return { data, meta };
   });

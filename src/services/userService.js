@@ -1,6 +1,7 @@
 import Boom from '@hapi/boom';
 
 import { hashPassword } from '@/utils/bcrypt';
+import { buildMeta } from '@/utils/pagination';
 
 import User from '@models/user';
 
@@ -9,8 +10,20 @@ import User from '@models/user';
  *
  * @returns {Promise}
  */
-export function getAllUsers() {
-  return User.fetchAll().then((users) => users.map((user) => user.filterSensitiveData()));
+export function getAllUsers({ page, pageSize }) {
+  const offset = (page - 1) * pageSize;
+
+  const data = User.query((qb) => {
+    qb.offset(offset).limit(pageSize);
+  }).fetchAll();
+
+  const count = User.count();
+
+  return Promise.all([data, count]).then(([data, totalCount]) => {
+    const meta = buildMeta({ page, pageSize }, totalCount);
+
+    return { data, meta };
+  });
 }
 
 /**
