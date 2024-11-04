@@ -11,14 +11,12 @@ import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import * as Sentry from '@sentry/node';
-import swaggerUi from 'swagger-ui-express';
 
 import routes from './routes';
 
 import json from '@middlewares/json';
 import * as errorHandler from '@middlewares/errorHandler';
 
-import swaggerSpec from '@utils/swagger';
 import logger, { logStream } from '@utils/logger';
 
 const app = express();
@@ -46,7 +44,6 @@ app.use(json);
 app.use('/api', routes);
 
 app.get('/api-docs', (req, res) => res.redirect('/api-docs/index.html'));
-app.use('/api-docs/index.html', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Error Middleware
 app.use(errorHandler.genericErrorHandler);
