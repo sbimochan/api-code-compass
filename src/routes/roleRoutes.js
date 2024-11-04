@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as roleController from '@controllers/rolesController';
+import * as roleController from '@/controllers/roles.controller';
 
 import { authorize } from '@middlewares/authorize';
 

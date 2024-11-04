@@ -1,6 +1,6 @@
 import Joi from '@hapi/joi';
 
-import * as movieService from '@services/movieService';
+import * as movieService from '@/services/movie.service';
 
 import validate from '@utils/validate';
 

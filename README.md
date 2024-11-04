@@ -6,7 +6,6 @@ Comes with:
 - ES7 [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)/[await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 - [Bookshelf](http://bookshelfjs.org/) ORM and [Knex](http://knexjs.org/) migrations
 - PostgreSQL (default) with support for MySQL and SQLite
-- API documentation using [swagger-ui-dist](https://www.npmjs.com/package/swagger-ui) and [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc)
 - [Docker](https://docs.docker.com/engine/docker-overview/) support for Development and Production
 - [ESLint](http://eslint.org/) for code linting
 - Request validation using [Joi](https://www.npmjs.com/package/@hapi/joi)

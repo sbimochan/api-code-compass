@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import userRoleRoutes from './userRoleRoutes';
 
-import * as usersController from '@controllers/usersController';
+import * as usersController from '@/controllers/users.controller';
 
 import { authorize } from '@middlewares/authorize';
 
