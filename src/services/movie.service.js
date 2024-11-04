@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 
-import Movie from '@models/movie';
+import Movie from '@/models/movie.model';
 
 import { buildMeta } from '@utils/pagination';
 

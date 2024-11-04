@@ -1,31 +1,31 @@
 import HttpStatus from 'http-status-codes';
 
-import * as userRoleService from '@services/userRoleService';
+import * as authService from '@/services/auth.service';
 
 /**
- * Update user roles.
+ * User login.
  *
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
-export function updateRoles(req, res, next) {
-  userRoleService
-    .updateRoles(req.params.userId, req.body)
+export function login(req, res, next) {
+  authService
+    .login(req.body)
     .then((data) => res.status(HttpStatus.OK).json({ data }))
     .catch((err) => next(err));
 }
 
 /**
- * Delete user role with roleId.
+ * User requesting new access token with refresh token.
  *
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
  */
-export function removeUserRole(req, res, next) {
-  userRoleService
-    .removeUserRole(req.params.userId, req.params.roleId)
+export function refreshAccessToken(req, res, next) {
+  authService
+    .refreshAccessToken(req.body)
     .then((data) => res.status(HttpStatus.OK).json({ data }))
     .catch((err) => next(err));
 }

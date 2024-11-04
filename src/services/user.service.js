@@ -3,7 +3,7 @@ import Boom from '@hapi/boom';
 import { hashPassword } from '@/utils/bcrypt';
 import { buildMeta } from '@/utils/pagination';
 
-import User from '@models/user';
+import User from '@/models/user.model';
 
 /**
  * Get all users.

@@ -2,8 +2,8 @@ import omit from 'lodash/omit';
 
 import db from '@/db';
 
-import Rent from './rent';
-import Role from './role';
+import Rent from './rent.model';
+import Role from './role.model';
 
 const TABLE_NAME = 'users';
 
