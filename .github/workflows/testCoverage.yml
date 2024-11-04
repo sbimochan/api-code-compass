@@ -1,0 +1,65 @@
+name: Run tests and upload coverage
+
+on: push
+
+jobs:
+  test:
+    name: Execute tests and gather coverage
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: ${{ secrets.TEST_DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+          POSTGRES_DB: $TEST_DB
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Lint the codebase
+        run: yarn lint
+
+      - name: Wait for Postgres to be ready
+        run: |
+          until pg_isready -h 127.0.0.1 -p 5432; do
+            echo "Waiting for Postgres to start..."
+            sleep 5
+          done
+
+      - name: Run database migration and tests
+        run: |
+          yarn migrate
+          yarn test:coverage
+        env:
+          NODE_ENV: test
+          DB_CLIENT: postgres
+          TEST_DB_NAME: $TEST_DB
+          TEST_DB_USER: ${{ secrets.TEST_DB_USER }}
+          TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
+
+      - name: Upload coverage results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

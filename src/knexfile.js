@@ -2,7 +2,7 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 
 // Default configuration for database connection
 let connection = {
-  port: process.env.DB_PORT,
+  port: process.env.DEFAULT_DB_PORT_IN_CONTAINER,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -15,7 +15,8 @@ let connection = {
 if (process.env.NODE_ENV === 'test') {
   connection = {
     ...connection,
-    port: process.env.TEST_DB_PORT,
+    client: process.env.DB_CLIENT,
+    port: process.env.DEFAULT_DB_PORT_IN_CONTAINER,
     host: process.env.TEST_DB_HOST,
     user: process.env.TEST_DB_USER,
     password: process.env.TEST_DB_PASSWORD,

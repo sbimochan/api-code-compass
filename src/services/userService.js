@@ -1,14 +1,29 @@
 import Boom from '@hapi/boom';
 
-import User from '../models/user';
+import { hashPassword } from '@/utils/bcrypt';
+import { buildMeta } from '@/utils/pagination';
+
+import User from '@models/user';
 
 /**
  * Get all users.
  *
  * @returns {Promise}
  */
-export function getAllUsers() {
-  return User.fetchAll();
+export function getAllUsers({ page, pageSize }) {
+  const offset = (page - 1) * pageSize;
+
+  const data = User.query((qb) => {
+    qb.offset(offset).limit(pageSize);
+  }).fetchAll();
+
+  const count = User.count();
+
+  return Promise.all([data, count]).then(([data, totalCount]) => {
+    const meta = buildMeta({ page, pageSize }, totalCount);
+
+    return { data, meta };
+  });
 }
 
 /**
@@ -20,7 +35,7 @@ export function getAllUsers() {
 export function getUser(id) {
   return new User({ id })
     .fetch()
-    .then(user => user)
+    .then((user) => user.filterSensitiveData())
     .catch(User.NotFoundError, () => {
       throw Boom.notFound('User not found');
     });
@@ -33,7 +48,16 @@ export function getUser(id) {
  * @returns {Promise}
  */
 export function createUser(user) {
-  return new User({ name: user.name }).save();
+  const hashedPassword = hashPassword(user.password);
+
+  return new User({
+    username: user.username,
+    fullName: user.fullName,
+    password: hashedPassword,
+    email: user.email
+  })
+    .save()
+    .then((user) => user.filterSensitiveData());
 }
 
 /**
@@ -44,7 +68,15 @@ export function createUser(user) {
  * @returns {Promise}
  */
 export function updateUser(id, user) {
-  return new User({ id }).save({ name: user.name });
+  return new User({ id })
+    .save({
+      username: user.username,
+      fullName: user.fullName,
+      password: user.password,
+      email: user.email,
+      isAdmin: user.isAdmin
+    })
+    .then((user) => user.filterSensitiveData());
 }
 
 /**
@@ -54,5 +86,5 @@ export function updateUser(id, user) {
  * @returns {Promise}
  */
 export function deleteUser(id) {
-  return new User({ id }).fetch().then(user => user.destroy());
+  return new User({ id }).fetch().then((user) => user.destroy());
 }

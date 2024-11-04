@@ -1,7 +1,14 @@
 import { Router } from 'express';
 
-import swaggerSpec from './utils/swagger';
 import userRoutes from './routes/userRoutes';
+import roleRoutes from './routes/roleRoutes';
+import authRoutes from './routes/authRoutes';
+import movieRoutes from './routes/movieRoutes';
+import rentalRoutes from './routes/rentalRoutes';
+
+import swaggerSpec from '@utils/swagger';
+
+import { authenticateToken } from '@middlewares/authenticateToken';
 
 /**
  * Contains all API routes for the application.
@@ -9,14 +16,14 @@ import userRoutes from './routes/userRoutes';
 const router = Router();
 
 /**
- * GET /api/swagger.json
+ * GET /api/swagger.json.
  */
-router.get('/swagger.json', (req, res) => {
+router.get('/swagger.json', (_, res) => {
   res.json(swaggerSpec);
 });
 
 /**
- * GET /api
+ * GET /api.
  */
 router.get('/', (req, res) => {
   res.json({
@@ -25,6 +32,11 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use('/users', userRoutes);
+router.use('/auth', authRoutes);
+
+router.use('/users', authenticateToken, userRoutes);
+router.use('/roles', authenticateToken, roleRoutes);
+router.use('/movies', authenticateToken, movieRoutes);
+router.use('/rents', authenticateToken, rentalRoutes);
 
 export default router;

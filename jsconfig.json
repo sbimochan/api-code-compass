@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "baseUrl": "src",
+    "allowJs": true,
+    "maxNodeModuleJsDepth": 2,
+    "paths": {
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
+      "@middlewares/*": ["./middlewares/*"],
+      "@services/*": ["./services/*"],
+      "@models/*": ["./models/*"],
+      "@utils/*": ["./utils/*"],
+      "@validators/*": ["./validators/*"],
+      "@constants/*": ["./constants/*"],
+      "@controllers/*": ["./controllers/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

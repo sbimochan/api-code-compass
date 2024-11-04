@@ -1,33 +1,43 @@
 import { Router } from 'express';
 
-import * as userController from '../controllers/users';
-import { findUser, userValidator } from '../validators/userValidator';
+import userRoleRoutes from './userRoleRoutes';
+
+import * as usersController from '@controllers/usersController';
+
+import { authorize } from '@middlewares/authorize';
+
+import { findUser, userValidator } from '@validators/userValidator';
 
 const router = Router();
 
 /**
- * GET /api/users
+ * GET /api/users.
  */
-router.get('/', userController.fetchAll);
+router.get('/', authorize('user.read'), usersController.fetchAll);
 
 /**
- * GET /api/users/:id
+ * GET /api/users/:id.
  */
-router.get('/:id', userController.fetchById);
+router.get('/:id', authorize('user.read'), usersController.fetchById);
 
 /**
- * POST /api/users
+ * POST /api/users.
  */
-router.post('/', userValidator, userController.create);
+router.post('/', authorize('user.create'), userValidator, usersController.create);
 
 /**
- * PUT /api/users/:id
+ * PUT /api/users/:id.
  */
-router.put('/:id', findUser, userValidator, userController.update);
+router.put('/:id', authorize('user.update'), findUser, userValidator, usersController.update);
 
 /**
- * DELETE /api/users/:id
+ * DELETE /api/users/:id.
  */
-router.delete('/:id', findUser, userController.deleteUser);
+router.delete('/:id', authorize('user.delete'), findUser, usersController.deleteUser);
+
+/**
+ * Routes for user roles.
+ */
+router.use('/', userRoleRoutes);
 
 export default router;

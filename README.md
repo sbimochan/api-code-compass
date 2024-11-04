@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/sbimochan/express-api-es6-starter.svg?branch=master)](https://travis-ci.org/sbimochan/express-api-es6-starter)
-[![Codecov](https://codecov.io/gh/sbimochan/express-api-es6-starter/branch/master/graph/badge.svg)](https://codecov.io/gh/sbimochan/express-api-es6-starter)
+[![codecov](https://codecov.io/gh/sbimochan/api-code-compass/branch/dev/graph/badge.svg?token=DI53MR3LK0)](https://codecov.io/gh/sbimochan/api-code-compass)
 
 Comes with:
 
@@ -66,7 +65,7 @@ Example,
 
 Use [docker-compose](https://docs.docker.com/compose/) to quickly bring up a stack with pre-configured Postgres database container. Data is ephemeral and containers will disappear when stack is removed.
 
-Specific configuration for Docker is in `.env.docker`
+Update `.env` file accordingly.
 
 - `0.0.0.0` as `$APP_HOST` to expose app on Docker network interface
 - Pre-configured Postgres settings - can be updated to point to another Postgres host
@@ -88,29 +87,29 @@ There are multiple build targets available for different stages. These images ca
 1. Building a production image.
 
    ```bash
-   $ docker build --target=prod -t express-api-es6-starter:prod .
+   $ docker build --target=prod -t api-code-compass:prod .
    ```
 
 2. Building an image for development.
 
    ```bash
-   $ docker build --target=dev -t express-api-es6-starter:dev .
+   $ docker build --target=dev -t api-code-compass:dev .
    ```
 
 3. Building an image that runs migration and/or rollback.
 
    ```bash
     # Docker image that runs migration and seeds.
-    $ docker build --target=migrate -t express-api-es6-starter:migrate .
+    $ docker build --target=migrate -t api-code-compass:migrate .
 
     # Docker image that rollbacks migrations.
-    $ docker build --target=migrate-rollback -t express-api-es6-starter:migrate-rollback .
+    $ docker build --target=migrate-rollback -t api-code-compass:migrate-rollback .
    ```
 
 Once the images have been built - all you need to do is run them providing a `.env` file. Like this:
 
 ```bash
-$ docker run -v "/path/to/your/.env:/app/.env" sbimochan/express-api-es6-starter:migrate
+$ docker run -v "/path/to/your/.env:/app/.env" sbimochan/api-code-compass:migrate
 ```
 
 ## Using MySQL instead of PostgreSQL
@@ -125,8 +124,8 @@ Update these lines in your `.env` file.
 - DB_CLIENT='pg'
 + DB_CLIENT='mysql'
 
-- DB_PORT='5432'
-+ DB_PORT='3306'
+- EXPOSED_DB_PORT='5432'
++ EXPOSED_DB_PORT='3306'
 ```
 
 You can remove the [pg](https://www.npmjs.com/package/pg) driver if you like to.
@@ -146,7 +145,12 @@ Run tests with coverage.
 
     $ yarn test:coverage
 
+## Postman Collection
+
+The postman collection consists of series of tests for this API.
+
+[Click here](https://api-code-compass.postman.co/workspace/API-Code-Compass-Workspace~c9caec1f-bc5c-44c0-8183-4826d8606984/collection/27851431-0a08f0a1-6e96-4fd4-aa88-801b65e4578b?action=share&creator=27851431&active-environment=27851431-0b2e00d4-2886-4a9a-ab71-9114b92c9c9a)
+
 ## Why 8848?
 
-Because the highest point in the world is [8848 metres](https://en.wikipedia.org/wiki/Mount_Everest).
-
+Because the highest point in the world is [8848 meters](https://en.wikipedia.org/wiki/Mount_Everest).
