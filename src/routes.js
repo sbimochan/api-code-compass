@@ -6,21 +6,12 @@ import authRoutes from './routes/authRoutes';
 import movieRoutes from './routes/movieRoutes';
 import rentalRoutes from './routes/rentalRoutes';
 
-import swaggerSpec from '@utils/swagger';
-
 import { authenticateToken } from '@middlewares/authenticateToken';
 
 /**
  * Contains all API routes for the application.
  */
 const router = Router();
-
-/**
- * GET /api/swagger.json.
- */
-router.get('/swagger.json', (_, res) => {
-  res.json(swaggerSpec);
-});
 
 /**
  * GET /api.
