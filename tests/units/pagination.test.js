@@ -9,10 +9,10 @@ describe('buildMeta', () => {
     const result = buildMeta(pagination, total);
 
     expect(result).to.deep.equal({
-      page: 1,
+      currentPage: 1,
       pageSize: 10,
-      total: 50,
-      totalPages: 5,
+      totalCount: 50,
+      totalPages: 5
     });
   });
 
@@ -23,10 +23,10 @@ describe('buildMeta', () => {
     const result = buildMeta(pagination, total);
 
     expect(result).to.deep.equal({
-      page: 2,
+      currentPage: 2,
       pageSize: 3,
-      total: 10,
-      totalPages: 4,
+      totalCount: 10,
+      totalPages: 4
     });
   });
 
@@ -37,10 +37,10 @@ describe('buildMeta', () => {
     const result = buildMeta(pagination, total);
 
     expect(result).to.deep.equal({
-      page: 1,
+      currentPage: 1,
       pageSize: 10,
-      total: 0,
-      totalPages: 0,
+      totalCount: 0,
+      totalPages: 0
     });
   });
 
@@ -51,10 +51,10 @@ describe('buildMeta', () => {
     const result = buildMeta(pagination, total);
 
     expect(result).to.deep.equal({
-      page: 1,
+      currentPage: 1,
       pageSize: 10,
-      total: 5,
-      totalPages: 1,
+      totalCount: 5,
+      totalPages: 1
     });
   });
 
@@ -65,10 +65,10 @@ describe('buildMeta', () => {
     const result = buildMeta(pagination, total);
 
     expect(result).to.deep.equal({
-      page: 100,
+      currentPage: 100,
       pageSize: 20,
-      total: 1000,
-      totalPages: 50,
+      totalCount: 1000,
+      totalPages: 50
     });
   });
 });

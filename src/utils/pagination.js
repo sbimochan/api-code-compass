@@ -6,12 +6,13 @@
  */
 export function buildMeta(pagination, total) {
   const { page, pageSize } = pagination;
+
   const totalPages = Math.ceil(total / pageSize);
 
   return {
-    page,
+    currentPage: page,
     pageSize,
-    total,
-    totalPages
+    totalPages,
+    totalCount: total
   };
 }

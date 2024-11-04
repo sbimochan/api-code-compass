@@ -2,6 +2,8 @@ import HttpStatus from 'http-status-codes';
 
 import * as userService from '@services/userService';
 
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '@/constants/constant';
+
 /**
  * Get all users.
  *
@@ -10,9 +12,11 @@ import * as userService from '@services/userService';
  * @param {Function} next
  */
 export function fetchAll(req, res, next) {
+  const { page = DEFAULT_PAGE_NUMBER, pageSize = DEFAULT_PAGE_SIZE } = req.query;
+
   userService
-    .getAllUsers()
-    .then((data) => res.json({ data }))
+    .getAllUsers({ page: Number(page), pageSize: Number(pageSize) })
+    .then((data) => res.json(data))
     .catch((err) => next(err));
 }
 
