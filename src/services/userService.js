@@ -15,7 +15,7 @@ export function getAllUsers({ page, pageSize }) {
 
   const data = User.query((qb) => {
     qb.offset(offset).limit(pageSize);
-  }).fetchAll();
+  }).fetchAll().then((users) => users.map((user) => user.filterSensitiveData()));
 
   const count = User.count();
 
