@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as authController from '@controllers/authController';
+import * as authController from '@/controllers/auths.controller';
 
 import { rateLimiter } from '@middlewares/rateLimiter';
 import { authenticateToken } from '@middlewares/authenticateToken';

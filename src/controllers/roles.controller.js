@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as roleService from '@services/roleService';
+import * as roleService from '@/services/role.service';
 
 /**
  * Get all roles.

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as moviesController from '@controllers/moviesController';
+import * as moviesController from '@/controllers/movies.controller';
 
 import { authorize } from '@middlewares/authorize';
 

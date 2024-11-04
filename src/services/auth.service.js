@@ -1,6 +1,6 @@
 import Boom from '@hapi/boom';
 
-import User from '@models/user';
+import User from '@/models/user.model';
 
 import { comparePassword } from '@/utils/bcrypt';
 import { generateAccessToken, generateRefreshToken, generateRefreshAccessToken } from '@utils/jwt';

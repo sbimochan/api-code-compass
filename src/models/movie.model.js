@@ -1,6 +1,6 @@
 import db from '@/db';
 
-import Rent from './rent';
+import Rent from './rent.model';
 
 const TABLE_NAME = 'movies';
 

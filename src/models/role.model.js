@@ -1,6 +1,6 @@
 import db from '@/db';
 
-import User from './user';
+import User from './user.model';
 
 const TABLE_NAME = 'roles';
 

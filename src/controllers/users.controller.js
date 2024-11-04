@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as userService from '@services/userService';
+import * as userService from '@/services/user.service';
 
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '@/constants/constant';
 

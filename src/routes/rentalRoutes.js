@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as rentsController from '@controllers/rentsController';
+import * as rentsController from '@/controllers/rents.controller';
 
 import { authorize } from '@middlewares/authorize';
 

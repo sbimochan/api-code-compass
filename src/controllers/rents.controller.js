@@ -1,6 +1,6 @@
 import HttpStatus from 'http-status-codes';
 
-import * as rentService from '@services/rentService';
+import * as rentService from '@/services/rent.service';
 
 /**
  * Create a new user.

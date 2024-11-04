@@ -1,7 +1,7 @@
 import Boom from '@hapi/boom';
 
-import Role from '@models/role';
-import User from '@models/user';
+import Role from '@/models/role.model';
+import User from '@/models/user.model';
 
 /**
  * Update roles for a user.

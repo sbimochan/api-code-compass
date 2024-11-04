@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import Boom from '@hapi/boom';
 
-import User from '@models/user';
+import User from '@/models/user.model';
 
 const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
